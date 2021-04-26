@@ -7,7 +7,7 @@ class Produto extends Model {
             valor: DataTypes.DOUBLE,
             tipo: DataTypes.STRING
             
-        },{sequelize,freezeTableName:true,})
+        },{sequelize,tableName:'produtos',})
     }
 }
 
