@@ -1,12 +1,24 @@
 const { restore } = require('../model/Produto');
 const Produto = require('../model/Produto')
 
+const { Op } = require('sequelize')
+
+
 module.exports = {
     async list(req,res){
-
+        const produtos = await Produto.findAll()
+        return res.render('admin/produto/list.ejs',{'Produtos':produtos, 'msg': req.flash('msg')})
     },
     async filtro(req,res){
-
+        let query = '%'+req.body.filtro+'%'
+        const produtos = await Produto.findAll({
+            where:{
+                nome: {
+                    [Op.like]: query
+                }
+            }
+        })
+        return res.render('admin/produto/list.ejs',{'Produtos':produtos, 'msg': req.flash('msg')})
     },
     async abreadd(req,res){
         res.render('admin/produto/add.ejs',{msg : req.flash('msg')})
@@ -23,7 +35,7 @@ module.exports = {
         });
     },
     async abreedit(req,res){
-//teste mudanças 
+
     },
     async edit(req,res){
 
