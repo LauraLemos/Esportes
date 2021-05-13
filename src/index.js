@@ -15,14 +15,14 @@ var session = require('express-session')
 require('./database/index')
 
 app.use(session({secret:'123',resave:true, saveUninitialized:true}))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(flash())
 
-app.set('view engine', 'ejs')
-app.set('views', 'src/views')
+app.set('view engine','ejs')
+app.set('views', __dirname+'/views')
 
-app.use(express.static(path.join("src","public")))
+app.use(express.static(path.join("public")))
 
 app.use('/admin/produto', produtoRoute)
 //app.use('/admin/quadra', quadraRoute)
