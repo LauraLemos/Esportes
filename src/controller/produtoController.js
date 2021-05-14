@@ -27,7 +27,7 @@ module.exports = {
         const { nome, valor, tipo } = req.body;
         await Produto.create({nome, valor, tipo}).then(
             (produto) => {
-            req.flash('msg',produto.nome + 'Foi adicionado com sucesso!');
+            req.flash('msg',produto.nome + ' foi adicionado com sucesso!');
             res.redirect('/admin/produto/add');
         }, (err) => {
             req.flash('msg', "problemas ao adicionar o produto: ")
@@ -35,10 +35,30 @@ module.exports = {
         });
     },
     async abreedit(req,res){
+        const id = req.params.id;
+        const produto = await Produto.findByPk(id);
+        //console.log(produto)
+        return res.render('admin/produto/edit.ejs',{'Produto':produto, 'msg': req.flash('msg')})
 
     },
     async edit(req,res){
-
+        const id = req.params.id;
+        const produto = await Produto.findByPk(id);
+        produto.nome = req.body.nome;
+        produto.valor = req.body.valor;
+        produto.tipo = req.body.tipo;
+        produto.save().then(
+            (produto) => {
+                req.flash('msg',produto.nome + ' foi editado com sucesso!');
+                return res.render('admin/produto/edit.ejs',{'Produto':produto, 'msg': req.flash('msg')})
+            },
+            (err) => {
+                req.flash('msg', ' não houve sucesso na edição!');
+                return res.render('admin/produto/edit.ejs',{'Produto':produto, 'msg': req.flash('msg')})
+                
+            }
+            );
+        
     },
     async del(req,res){
 

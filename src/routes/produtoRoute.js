@@ -17,10 +17,10 @@ routes.get('/add',produtoController.abreadd)
 routes.post('/add',produtoController.add)
 
 //abre edit
-routes.get('/edt/:id',produtoController.abreedit)
+routes.get('/edit/:id',produtoController.abreedit)
 
 //edit
-routes.post('/edt/:id',produtoController.edit)
+routes.post('/edit/:id',produtoController.edit)
 
 //del
 routes.get('/del/:id',produtoController.del)
