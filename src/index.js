@@ -27,7 +27,7 @@ app.use(express.static(path.join("public")))
 app.use('/admin/produto', produtoRoute)
 //app.use('/admin/quadra', quadraRoute)
 //app.use('/caixa', caixaRoute)
-
+    
 
 
 app.listen(porta)
