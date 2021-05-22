@@ -31,3 +31,4 @@ app.use('/admin/produto', produtoRoute)
 
 
 app.listen(porta)
+    console.log("OII PODE IR CONFERIR")
